@@ -42,6 +42,11 @@ const Lots = () => {
   useEffect(() => {
     drawLots();
   }, []);
+   
+  useEffect(()=>{
+    showRemoveModal && 
+    calculateHrsAmt()
+  },[showRemoveModal]);
 
   useEffect(() => {
     setFreeLotsList(allLots.filter((lot) => lot.free));
@@ -49,7 +54,7 @@ const Lots = () => {
 
   function drawLots(): void {
     if (allLots.length < numberOfVehicles) {
-      for (let i = 0; i < numberOfVehicles; i++) {
+      for (let i = 1; i < numberOfVehicles; i++) {
         console.log("hello");
         console.log(tempLots);
         tempLots.push({
@@ -107,6 +112,8 @@ const Lots = () => {
       setAmnt(10 + (timeDiffHrs - 2) * 10);
     }
   }
+
+
 
   return (
     <>
@@ -178,6 +185,7 @@ const Lots = () => {
           </>
         </Modal>
         <Modal
+          
           open={showRemoveModal}
           onClose={() => setShowRemoveModal(false)}
           sx={{
